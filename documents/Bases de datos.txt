@@ -1,0 +1,14 @@
+hotel_operaciones
+- usuarios
+- huespedes
+- habitaciones
+- reservaciones
+
+hotel_auditoria
+- operaciones
+-- int ID
+-- VARCHAR tipo
+-- int ID_usuario_responsable
+-- int ID_reservacion
+-- TIME hora
+-- TEXT motivo
