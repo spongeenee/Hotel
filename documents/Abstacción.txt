@@ -1,0 +1,55 @@
+Usuario (Builder)
+- long ID
+- String usuario
+- String password
+- UsuarioRol rol
+- LocalDateTime login
+
+UsuarioRol (Factory)
+- Set<Permisos> permisos
+
+RecepcionistaRol extends UsuarioRol
+[...]
+
+TecnicoRol extends UsuarioRol
+[...]
+
+SupervisorRol extends UsuarioRol
+[....]
+
+// SERVICIO
+
+Huesped (record)
+- long ID
+- long reservacion_ID
+- String nombre
+- String mail
+
+Habitacion (Static Factory)
+- long ID
+- Suite(enum) tipo
+- double tarifa_per_dia
+- boolean ocupada
+- boolean fuera_de_servicio
+
+(constructor privado, solo puede obtenerse un objeto con métodos:
+  public static Habitación deTipo(long id, Tipo tipo)
+  public static Habitación conTarifaPersonalizada(long id, Tipo tipo, double tarifa)
+)
+
+Reservacion (Builder)
+- long ID
+- String mail
+- Estado(enum) estado
+- LocalDateTime fecha_registro
+- LocalDateTime fecha_ingreso
+- LocalDateTime fecha_salida
+- boolean pagado
+
+Operacion (record)
+- long ID
+- Accion(enum) accion
+- Usuario responsable
+- LocalDateTime hora
+- String motivo
+

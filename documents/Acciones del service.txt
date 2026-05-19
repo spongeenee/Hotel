@@ -1,0 +1,13 @@
+ReservacionService
+// CRUD BASICO {
+- String/boolean registrar(Reservacion reservacion)
+- String/boolean modificar(Reservacion reservacion)
+- String/boolean elminiar(long ID_reservacion)
+}
+// FILTERS {
+- List<Reservacion> filtrar()
+- List<Reservacion> filtrarActivas()
+- List<Reservacion> filtrarPerEstado(Estado estado) //ACTIVA, PENDIENTE, FINALIZADA...
+- List<Reservacion> filtrarPorUsuario(long ID)
+- List<Reservacion> filtrarPorFecha(LocalTimeDate inicio, LocalTimeDate fin) (se podrá?)
+}
