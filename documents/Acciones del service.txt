@@ -1,13 +1,24 @@
-ReservacionService
-// CRUD BASICO {
-- String/boolean registrar(Reservacion reservacion)
-- String/boolean modificar(Reservacion reservacion)
-- String/boolean elminiar(long ID_reservacion)
-}
-// FILTERS {
-- List<Reservacion> filtrar()
-- List<Reservacion> filtrarActivas()
-- List<Reservacion> filtrarPerEstado(Estado estado) //ACTIVA, PENDIENTE, FINALIZADA...
-- List<Reservacion> filtrarPorUsuario(long ID)
-- List<Reservacion> filtrarPorFecha(LocalTimeDate inicio, LocalTimeDate fin) (se podrá?)
-}
+ReservacionService (Manejar lógica de negocios de reservaciones en torno a base de datos)
+    // CRUD BASICO
+    String/boolean registrar(Reservacion reservacion)
+    String/boolean modificar(Reservacion reservacion)
+    String/boolean elminiar(long ID_reservacion)
+    // FILTERS
+    List<Reservacion> filtrarTodo()
+    List<Reservacion> filtrarPerEstado(Estado estado)
+    List<Reservacion> filtrarPorUsuario(long ID)
+    List<Reservacion> filtrarPorUsuario(String usuario)
+    List<Reservacion> filtrarPorFecha(LocalTimeDate inicio, LocalTimeDate fin)
+    List<Reservacion> filtrarPorCriterio(ReservacionFiltro criterio)
+
+AuthorizacionService (Manejar autorización de permisos entre usuarios)
+    boolean autorizar(long ID)
+
+RecepcionistaService (Manejar lógica de recepcionista en torno a operaciones que puede hacer)
+    String/boolean checkIn(Reservacion reservacion)
+    String/boolean checkOut(Reservacion reservacion)
+    String/boolean registrar(Reservacion reservacion)
+    String/boolean modificar(Reservacion reservacion)
+    String/boolean cancelar(Reservacion reservacion)
+
+Va a sonar muy mamón pero, qué tal usar ints de retorno para jugar más con la interfaz gráfica

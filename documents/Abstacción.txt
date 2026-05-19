@@ -6,7 +6,7 @@ Usuario (Builder)
 - LocalDateTime login
 
 UsuarioRol (Factory)
-- Set<Permisos> permisos
+- Set<Permiso> permisos
 
 RecepcionistaRol extends UsuarioRol
 [...]
@@ -53,3 +53,35 @@ Operacion (record)
 - LocalDateTime hora
 - String motivo
 
+//ENUMS
+Permiso (para Usuario)
+    VER_RESERVACIONES,              (Recepcionista, Técnico, Supervisor)
+    VER_RESERVACIONES_CANCELADAS,   (Supervisor)
+    MODIFICAR_RESERVACION,          (Recepcionista, Técnico, Supervisor)
+    REGISTRAR_OPERACION             (Recepcionista, Técnico, Supervisor)
+
+Suite (para Habitacion)
+    SENCILLA(850.00),
+    DOBLE(1200.00),
+    SUITE(2500.00);
+
+Estado (para Reservacion)
+    ACTIVA
+    FINALIZADA
+    PENDIENTE
+    CONFIRMADA
+    CANCELADA
+
+Accion (para Operacion)
+    REGISTRO
+    MODIFICACION
+    CANCELACION
+    CHECK-IN
+    CHECKOUT
+
+//Auxiliar
+ReservacionFiltro
+    Estado estado
+    LocalDateTime desde
+    LocalDateTime hasta
+    String mailHuesped
