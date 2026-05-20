@@ -1,9 +1,9 @@
 Usuario (Builder)
 - long ID
 - String usuario
-- String password
+- String passwordHash
 - UsuarioRol rol
-- LocalDateTime login
+- LocalDateTime ultimoLogin
 
 UsuarioRol (Factory)
 - Set<Permiso> permisos
@@ -21,16 +21,15 @@ SupervisorRol extends UsuarioRol
 
 Huesped (record)
 - long ID
-- long reservacion_ID
 - String nombre
 - String mail
 
 Habitacion (Static Factory)
 - long ID
-- Suite(enum) tipo
-- double tarifa_per_dia
+- TipoHabitacion(enum) tipo
+- double tarifaPerDia
 - boolean ocupada
-- boolean fuera_de_servicio
+- boolean fueraDeServicio
 
 (constructor privado, solo puede obtenerse un objeto con métodos:
   public static Habitación deTipo(long id, Tipo tipo)
@@ -39,15 +38,17 @@ Habitacion (Static Factory)
 
 Reservacion (Builder)
 - long ID
-- String mail
-- Estado(enum) estado
-- LocalDateTime fecha_registro
-- LocalDateTime fecha_ingreso
-- LocalDateTime fecha_salida
+- long huespedID
+- long habitacionID
+- Estado(enum) estado (¿esta usualmente sería creada como pendiente?)(se tendría que usar el confirmar del RecepcionistaService para confirmar)
+- LocalDateTime fecha_registro (Este si ocupa la hora actual)
+- LocalDateTime fecha_ingreso (Me di cuenta que se puede usar LocalTime.NOON porque empezamos a recibir a todos al medio dia)
+- LocalDateTime fecha_salida (Lo mismo pero sacamos todos a las 12)
 - boolean pagado
 
 Operacion (record)
 - long ID
+- long reservacionID
 - Accion(enum) accion
 - Usuario responsable
 - LocalDateTime hora
@@ -55,12 +56,17 @@ Operacion (record)
 
 //ENUMS
 Permiso (para Usuario)
+    CREAR_RESERVACION,              (Recepcionista)
     VER_RESERVACIONES,              (Recepcionista, Técnico, Supervisor)
     VER_RESERVACIONES_CANCELADAS,   (Supervisor)
     MODIFICAR_RESERVACION,          (Recepcionista, Técnico, Supervisor)
-    REGISTRAR_OPERACION             (Recepcionista, Técnico, Supervisor)
+    CANCELAR_RESERVACION,           (Recepcionista, Supervisor)
+    REGISTRAR_OPERACION,            (Recepcionista, Técnico, Supervisor)
+    GESTIONAR_HABITACIONES,         (Técnico)
+    GESTIONAR_CATALOGOS,            (Supervisor)
+    VER_AUDITORIA                   (Supervisor)
 
-Suite (para Habitacion)
+TipoHabitacion (para Habitacion)
     SENCILLA(850.00),
     DOBLE(1200.00),
     SUITE(2500.00);

@@ -1,14 +1,19 @@
 package com.example.hotel;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+
+import java.time.LocalTime;
 
 public class HelloController {
     @FXML
-    private Label welcomeText;
+    private Label date;
+    @FXML
+    private DatePicker datePicker;
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    protected void showDatePicker() {
+        date.setText(datePicker.getValue().atTime(LocalTime.NOON).toString());
     }
 }

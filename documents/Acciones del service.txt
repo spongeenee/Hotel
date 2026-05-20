@@ -21,4 +21,8 @@ RecepcionistaService (Manejar lógica de recepcionista en torno a operaciones qu
     String/boolean modificar(Reservacion reservacion)
     String/boolean cancelar(Reservacion reservacion)
 
-Va a sonar muy mamón pero, qué tal usar ints de retorno para jugar más con la interfaz gráfica
+TecnicoService / MantenimientoService
+
+
+SupervisorService
+

@@ -7,18 +7,26 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<BorderPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotel.HelloController">
-   <center>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<BorderPane
+        xmlns="http://javafx.com/javafx/26"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="com.example.hotel.HelloController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <center>
        <VBox alignment="CENTER" spacing="20.0">
-           <padding>
-               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-           </padding>
+           <DatePicker fx:id="datePicker" onAction="#showDatePicker"/>
            <TableView prefHeight="200.0" prefWidth="200.0">
                <columns>
                    <TableColumn prefWidth="75.0" text="C1"/>
                    <TableColumn prefWidth="75.0" text="C2"/>
                </columns>
            </TableView>
+           <Label fx:id="date"/>
        </VBox>
    </center>
 </BorderPane>
