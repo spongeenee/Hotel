@@ -11,9 +11,6 @@ UsuarioRol (Factory)
 RecepcionistaRol extends UsuarioRol
 [...]
 
-TecnicoRol extends UsuarioRol
-[...]
-
 SupervisorRol extends UsuarioRol
 [....]
 
@@ -21,7 +18,6 @@ SupervisorRol extends UsuarioRol
 
 Huesped (record)
 - long ID
-- long reservacion_ID
 - String nombre
 - String mail
 
@@ -38,13 +34,12 @@ Habitacion (Static Factory)
 )
 
 Reservacion (Builder)
-- long ID
-- String mail
-- Estado(enum) estado
-- LocalDateTime fecha_registro
-- LocalDateTime fecha_ingreso
-- LocalDateTime fecha_salida
-- boolean pagado
+- long huespedID
+- long habitacionID
+- Estado(enum) estado (¿esta usualmente sería creada como pendiente?)(se tendría que usar el confirmar del RecepcionistaService para confirmar)
+- LocalDateTime fecha_registro (Este si ocupa la hora actual)
+- LocalDateTime fecha_ingreso (Me di cuenta que se puede usar LocalTime.NOON porque empezamos a recibir a todos al medio dia)
+- LocalDateTime fecha_salida (Lo mismo pero sacamos todos a las 12)
 
 Operacion (record)
 - long ID
@@ -57,12 +52,11 @@ Operacion (record)
 //ENUMS
 Permiso (para Usuario)
     CREAR_RESERVACION,              (Recepcionista)
-    VER_RESERVACIONES,              (Recepcionista, Técnico, Supervisor)
+    VER_RESERVACIONES,              (Recepcionista, Supervisor)
     VER_RESERVACIONES_CANCELADAS,   (Supervisor)
-    MODIFICAR_RESERVACION,          (Recepcionista, Técnico, Supervisor)
-    CANCELAR_RESERVACION,           (Recepcionista, Supervisor)
-    REGISTRAR_OPERACION,            (Recepcionista, Técnico, Supervisor)
-    GESTIONAR_HABITACIONES,         (Técnico)
+    MODIFICAR_RESERVACION,          (Recepcionista, Supervisor)
+    CANCELAR_RESERVACION,           (Supervisor)
+    GESTIONAR_HABITACIONES,         (Supervisor)
     GESTIONAR_CATALOGOS,            (Supervisor)
     VER_AUDITORIA                   (Supervisor)
 

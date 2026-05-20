@@ -21,8 +21,5 @@ RecepcionistaService (Manejar lógica de recepcionista en torno a operaciones qu
     String/boolean modificar(Reservacion reservacion)
     String/boolean cancelar(Reservacion reservacion)
 
-TecnicoService / MantenimientoService
-
-
 SupervisorService
 
