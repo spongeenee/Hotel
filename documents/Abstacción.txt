@@ -38,13 +38,12 @@ Habitacion (Static Factory)
 )
 
 Reservacion (Builder)
-- long ID
-- String mail
-- Estado(enum) estado
-- LocalDateTime fecha_registro
-- LocalDateTime fecha_ingreso
-- LocalDateTime fecha_salida
-- boolean pagado
+- long huespedID
+- long habitacionID
+- Estado(enum) estado (¿esta usualmente sería creada como pendiente?)(se tendría que usar el confirmar del RecepcionistaService para confirmar)
+- LocalDateTime fecha_registro (Este si ocupa la hora actual)
+- LocalDateTime fecha_ingreso (Me di cuenta que se puede usar LocalTime.NOON porque empezamos a recibir a todos al medio dia)
+- LocalDateTime fecha_salida (Lo mismo pero sacamos todos a las 12)
 
 Operacion (record)
 - long ID
