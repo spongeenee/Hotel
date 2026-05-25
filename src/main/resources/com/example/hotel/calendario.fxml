@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.hotel.controller.CalendarioController"
+            style="-fx-background-color: #f5f6fa;">
+
+    <padding>
+        <Insets top="16" right="16" bottom="16" left="16"/>
+    </padding>
+
+    <!-- ── ENCABEZADO ─────────────────────────────────────────────────── -->
+    <top>
+        <VBox spacing="10">
+
+            <!-- Navegación año -->
+            <HBox alignment="CENTER" spacing="12">
+                <Button text="◀◀" onAction="#onAnioAnterior"
+                        style="-fx-background-color: transparent; -fx-cursor: hand;
+                               -fx-font-size: 11; -fx-text-fill: #78909c;"/>
+                <Label fx:id="lblMesAnio"
+                       style="-fx-font-size: 22; -fx-font-weight: bold;
+                              -fx-text-fill: #263238; -fx-min-width: 260;
+                              -fx-alignment: center;"/>
+                <Button text="▶▶" onAction="#onAnioSiguiente"
+                        style="-fx-background-color: transparent; -fx-cursor: hand;
+                               -fx-font-size: 11; -fx-text-fill: #78909c;"/>
+            </HBox>
+
+            <!-- Navegación mes -->
+            <HBox alignment="CENTER" spacing="20">
+                <Button text="◀  Mes anterior" onAction="#onMesAnterior"
+                        style="-fx-background-color: #eceff1; -fx-border-radius: 6;
+                                -fx-cursor: hand;
+                               -fx-font-size: 12; -fx-text-fill: #37474f;
+                               -fx-padding: 5 14 5 14;"/>
+                <Button text="Mes siguiente  ▶" onAction="#onMesSiguiente"
+                        style="-fx-cursor: hand;
+                               -fx-font-size: 12; -fx-text-fill: #37474f;
+                               -fx-padding: 5 14 5 14;"/>
+            </HBox>
+
+            <BorderPane.margin>
+                <Insets bottom="10"/>
+            </BorderPane.margin>
+        </VBox>
+    </top>
+
+    <!-- ── GRID CALENDARIO ────────────────────────────────────────────── -->
+    <center>
+        <GridPane fx:id="gridCalendario"
+                  hgap="4" vgap="4"
+                  style="-fx-background-color: #f5f6fa;">
+
+            <!-- 7 columnas iguales -->
+            <columnConstraints>
+                <ColumnConstraints percentWidth="14.28" hgrow="ALWAYS" halignment="CENTER"/>
+                <ColumnConstraints percentWidth="14.28" hgrow="ALWAYS" halignment="CENTER"/>
+                <ColumnConstraints percentWidth="14.28" hgrow="ALWAYS" halignment="CENTER"/>
+                <ColumnConstraints percentWidth="14.28" hgrow="ALWAYS" halignment="CENTER"/>
+                <ColumnConstraints percentWidth="14.28" hgrow="ALWAYS" halignment="CENTER"/>
+                <ColumnConstraints percentWidth="14.28" hgrow="ALWAYS" halignment="CENTER"/>
+                <ColumnConstraints percentWidth="14.28" hgrow="ALWAYS" halignment="CENTER"/>
+            </columnConstraints>
+        </GridPane>
+    </center>
+
+    <!-- ── PIE: resumen del mes ───────────────────────────────────────── -->
+    <bottom>
+        <HBox alignment="CENTER">
+            <Label fx:id="lblResumen"
+                   style="-fx-font-size: 11; -fx-text-fill: #78909c;
+                          -fx-padding: 10 0 0 0;"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>
