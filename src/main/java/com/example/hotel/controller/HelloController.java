@@ -1,22 +1,40 @@
 package com.example.hotel.controller;
 
 import com.example.hotel.HelloApplication;
+import com.example.hotel.notreallymodels.KPIChartFactory;
+import com.example.hotel.notreallymodels.LiveHour;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
+import org.kordamp.bootstrapfx.scene.layout.Panel;
+
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
 
 public class HelloController {
+    LiveHour liveHour = new LiveHour();
+    @FXML private Label hora;
     @FXML private Label date;
     @FXML private DatePicker datePicker;
     @FXML private StackPane contenedorCalendario;
-    @FXML private StackPane menuStackPane;
+    @FXML private StackPane menuContenedor;
+    @FXML private VBox dashboard;
+    @FXML private VBox reservacionPane;
+    @FXML private VBox huespedesPane;
+    @FXML private VBox KPIentradas;
+    @FXML private VBox KPIsalidas;
+    @FXML private VBox KPIrecientes;
 
     @FXML
     protected void showDatePicker() {
@@ -25,12 +43,29 @@ public class HelloController {
 
     @FXML
     protected void initialize() {
+        menuContenedor.getChildren().setAll(dashboard);
         cargarCalendario();
+        cargarGraphDashboard();
     }
 
     @FXML
-    protected void mostrarReservacionStackPane() {
+    protected void mostrarReservacionPane() {
+        menuContenedor.getChildren().clear();
+        menuContenedor.getChildren().setAll(reservacionPane);
     }
+
+    @FXML
+    protected void mostrarHuespedesPane() {
+        menuContenedor.getChildren().clear();
+        menuContenedor.getChildren().setAll(huespedesPane);
+    }
+
+    @FXML
+    protected void mostrarDashboardPane() {
+        menuContenedor.getChildren().clear();
+        menuContenedor.getChildren().setAll(dashboard);
+    }
+
     private void cargarCalendario() {
         try {
             FXMLLoader loader = new FXMLLoader(
@@ -44,4 +79,12 @@ public class HelloController {
         }
     }
 
+    private void cargarGraphDashboard() {
+        KPIentradas.getChildren().add(
+                KPIChartFactory.crearKPI("Entradas del dia", 10, 20));
+        KPIsalidas.getChildren().add(
+                KPIChartFactory.crearKPI("Salidas del día", 5, 15));
+        KPIrecientes.getChildren().add(
+                KPIChartFactory.crearKPI("Nuevas reservaciones", 1, 0));
+    }
 }
