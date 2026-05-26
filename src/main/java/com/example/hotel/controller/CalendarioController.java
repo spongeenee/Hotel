@@ -56,7 +56,7 @@ public class CalendarioController implements Initializable {
         lblMesAnio.setText(mes + "  " + mesActual.getYear());
 
         // Encabezados días de la semana
-        String[] dias = {"Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"};
+        String[] dias = {"Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"};
         for (int i = 0; i < 7; i++) {
             Label h = new Label(dias[i]);
             h.setMaxWidth(Double.MAX_VALUE);
@@ -69,9 +69,8 @@ public class CalendarioController implements Initializable {
 
         // Celdas de días
         LocalDate primero = mesActual.atDay(1);
-        int offset = primero.getDayOfWeek().getValue() - 1; // lun=0 … dom=6
 
-        int col = offset;
+        int col = primero.getDayOfWeek().getValue();
         int row = 1;
 
         for (int d = 1; d <= mesActual.lengthOfMonth(); d++) {
@@ -85,48 +84,59 @@ public class CalendarioController implements Initializable {
 
     // ── Celda individual ─────────────────────────────────────────────────────
     private VBox celdaDia(LocalDate fecha) {
-        boolean esHoy   = fecha.equals(LocalDate.now());
-        boolean esMes   = fecha.getMonth() == mesActual.getMonth();
+        boolean esHoy = fecha.equals(LocalDate.now());
+        boolean esMes = fecha.getMonth() == mesActual.getMonth();
 
         long entradas = contarEntradas(fecha);
-        long salidas  = contarSalidas(fecha);
-        long activas  = contarActivas(fecha);
+        long salidas = contarSalidas(fecha);
+        long activas = contarActivas(fecha);
 
         // Contenedor
         VBox celda = new VBox(3);
         celda.setPadding(new Insets(5));
-        celda.setPrefSize(96, 82);
-        celda.setAlignment(Pos.TOP_LEFT);
+        celda.setMinSize(40, 40);
+        celda.setAlignment(Pos.TOP_CENTER);
 
-        String bg = esHoy ? "#e3f2fd" : (esMes ? "white" : "#fafafa");
-        String borde = esHoy ? "#1976d2" : "#e0e0e0";
+        String bg = esHoy ? "linear-gradient(#d8e1ff, #9db5ff)"
+                : (esMes ? "linear-gradient(#ececec, #cfcfcf)"
+                         : "#fafafa");
+
+        String bgPressed = "linear-gradient(#d8e1ff, #9db5ff)";
+        String bordePressed = "#1976d2";
+
+        String borde = esHoy ? "#1976d2"
+                : "#a2a2a2";
+
         celda.setStyle(
                 "-fx-background-color: " + bg + ";" +
                         "-fx-border-color: " + borde + ";" +
-                        "-fx-border-width: " + (esHoy ? "2" : "1") + ";" +
-                        "-fx-border-radius: 6;" +
-                        "-fx-background-radius: 6;"
+                        "-fx-border-width: " + (esHoy ? "1.5" : "1") + ";" +
+                        "-fx-border-radius: 4;" +
+                        "-fx-background-radius: 4;"
         );
 
         // Número del día
         Label numLabel = new Label(String.valueOf(fecha.getDayOfMonth()));
-        numLabel.setFont(Font.font("System", FontWeight.BOLD, 13));
+        numLabel.setFont(Font.font("System", FontWeight.BOLD, 12));
         numLabel.setTextFill(esHoy ? Color.web("#1565c0") : Color.web("#37474f"));
         celda.getChildren().add(numLabel);
 
         // Indicadores (solo si hay datos)
-        if (activas  > 0) celda.getChildren().add(chip("● " + activas  + " activa(s)", "#455a64", "#eceff1"));
-        if (entradas > 0) celda.getChildren().add(chip("↓ " + entradas + " entrada(s)", "#2e7d32", "#e8f5e9"));
-        if (salidas  > 0) celda.getChildren().add(chip("↑ " + salidas  + " salida(s)",  "#b71c1c", "#ffebee"));
+        //if (activas > 0) celda.getChildren().add(chip("● " + activas, "#455a64", "#eceff1"));
+        //if (entradas > 0) celda.getChildren().add(chip("↓ " + entradas, "#2e7d32", "#e8f5e9"));
+        //if (salidas > 0) celda.getChildren().add(chip("↑ " + salidas, "#b71c1c", "#ffebee"));
 
-        // Hover
-        celda.setOnMouseEntered(e -> celda.setStyle(celda.getStyle()
-                .replace(bg, esHoy ? "#bbdefb" : "#f5f5f5")));
-        celda.setOnMouseExited(e  -> celda.setStyle(celda.getStyle()
-                .replace(esHoy ? "#bbdefb" : "#f5f5f5", bg)));
+        celda.setOnMousePressed(e -> {
+            celda.setStyle(celda.getStyle().replace(bg, esHoy ? "#bbdefb" : bgPressed));
+            celda.setStyle(celda.getStyle().replace(borde, bordePressed));
+        });
+        celda.setOnMouseReleased(e -> {
+            celda.setStyle(celda.getStyle().replace(esHoy ? "#bbdefb" : bgPressed, bg));
+            celda.setStyle(celda.getStyle().replace(bordePressed, borde));
+        });
 
-        // Click → detalle (placeholder)
         celda.setOnMouseClicked(e -> onDiaClick(fecha, entradas, salidas, activas));
+
 
         return celda;
     }

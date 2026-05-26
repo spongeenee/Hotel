@@ -16,7 +16,10 @@ public class HelloController {
     @FXML private Label date;
     @FXML private DatePicker datePicker;
     @FXML private StackPane contenedorCalendario;
-    @FXML private StackPane menuStackPane;
+    @FXML private StackPane menuContenedor;
+    @FXML private VBox dashboard;
+    @FXML private VBox reservacionPane;
+    @FXML private VBox huespedesPane;
 
     @FXML
     protected void showDatePicker() {
@@ -25,12 +28,20 @@ public class HelloController {
 
     @FXML
     protected void initialize() {
+        menuContenedor.getChildren().setAll(dashboard);
         cargarCalendario();
     }
 
     @FXML
-    protected void mostrarReservacionStackPane() {
+    protected void mostrarReservacionPane() {
+        menuContenedor.getChildren().setAll(reservacionPane);
     }
+
+    @FXML
+    protected void mostrarHuespedesPane() {
+        menuContenedor.getChildren().setAll(huespedesPane);
+    }
+
     private void cargarCalendario() {
         try {
             FXMLLoader loader = new FXMLLoader(
