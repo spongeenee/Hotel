@@ -7,6 +7,7 @@ module com.example.hotel {
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires java.sql;
 
     opens com.example.hotel to javafx.fxml;
     exports com.example.hotel;

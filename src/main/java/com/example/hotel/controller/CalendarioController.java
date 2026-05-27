@@ -19,19 +19,16 @@ import java.util.*;
 
 public class CalendarioController implements Initializable {
 
-    // ── FXML ────────────────────────────────────────────────────────────────
     @FXML private GridPane gridCalendario;
-    @FXML private Label    lblMesAnio;
-    @FXML private Label    lblResumen;
+    @FXML private Label lblMesAnio;
+    @FXML private Label lblResumen;
 
-    // ── Estado interno ───────────────────────────────────────────────────────
     private YearMonth mesActual;
 
     // ── Modelo mínimo (sin importar tu clase real todavía) ───────────────────
     private record MockReservacion(LocalDateTime ingreso, LocalDateTime salida) {}
     private List<MockReservacion> reservaciones;
 
-    // ════════════════════════════════════════════════════════════════════════
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         mesActual     = YearMonth.now();
@@ -82,7 +79,6 @@ public class CalendarioController implements Initializable {
         actualizarResumen();
     }
 
-    // ── Celda individual ─────────────────────────────────────────────────────
     private VBox celdaDia(LocalDate fecha) {
         boolean esHoy = fecha.equals(LocalDate.now());
         boolean esMes = fecha.getMonth() == mesActual.getMonth();
@@ -91,19 +87,16 @@ public class CalendarioController implements Initializable {
         long salidas = contarSalidas(fecha);
         long activas = contarActivas(fecha);
 
-        // Contenedor
         VBox celda = new VBox(3);
         celda.setPadding(new Insets(5));
         celda.setPrefSize(30, 40);
         celda.setAlignment(Pos.TOP_CENTER);
 
-        String bg = esHoy ? "linear-gradient(#d8e1ff, #9db5ff)"
+        String dayFocus = "linear-gradient(#d8e1ff, #9db5ff)";
+        String bg = esHoy ? dayFocus
                 : (esMes ? "linear-gradient(#ececec, #cfcfcf)"
                          : "#fafafa");
-
-        String bgPressed = "linear-gradient(#d8e1ff, #9db5ff);";
         String bordePressed = "#1976d2;";
-
         String borde = esHoy ? "#1976d2" : "#a2a2a2";
 
         celda.setStyle(
@@ -121,21 +114,25 @@ public class CalendarioController implements Initializable {
         celda.getChildren().add(numLabel);
 
         // Indicadores (solo si hay datos)
-        //if (activas > 0) celda.getChildren().add(chip("● " + activas, "#455a64", "#eceff1"));
-        //if (entradas > 0) celda.getChildren().add(chip("↓ " + entradas, "#2e7d32", "#e8f5e9"));
-        //if (salidas > 0) celda.getChildren().add(chip("↑ " + salidas, "#b71c1c", "#ffebee"));
+        if (activas > 0)
+            celda.getChildren().add(chip(Long.toString(activas), "#455a64", "#eceff1"));
+        if (entradas > 0)
+            celda.getChildren().add(chip(Long.toString(entradas), "#2e7d32", "#e8f5e9"));
+        if (salidas > 0)
+            celda.getChildren().add(chip(Long.toString(salidas), "#b71c1c", "#ffebee"));
 
+        celda.setOnMouseEntered( e ->
+                celda.setStyle(celda.getStyle() + "-fx-cursor: hand")
+                );
         celda.setOnMousePressed(e -> {
-            celda.setStyle(celda.getStyle().replace(bg, esHoy ? "#bbdefb" : bgPressed));
+            celda.setStyle(celda.getStyle().replace(bg, esHoy ? "#bbdefb" : dayFocus));
             celda.setStyle(celda.getStyle().replace(borde, bordePressed));
         });
         celda.setOnMouseReleased(e -> {
-            celda.setStyle(celda.getStyle().replace(esHoy ? "#bbdefb" : bgPressed, bg));
+            celda.setStyle(celda.getStyle().replace(esHoy ? "#bbdefb" : dayFocus, bg));
             celda.setStyle(celda.getStyle().replace(bordePressed, borde));
         });
-
         celda.setOnMouseClicked(e -> onDiaClick(fecha, entradas, salidas, activas));
-
 
         return celda;
     }
@@ -171,8 +168,6 @@ public class CalendarioController implements Initializable {
                 "Este mes: " + totalEntradas + " llegada(s)  ·  " + totalSalidas + " salida(s)"
         );
     }
-
-    // ── Conteos por fecha ────────────────────────────────────────────────────
     private long contarEntradas(LocalDate f) {
         return reservaciones.stream()
                 .filter(r -> r.ingreso().toLocalDate().equals(f)).count();

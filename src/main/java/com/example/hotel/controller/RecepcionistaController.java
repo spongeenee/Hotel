@@ -2,28 +2,18 @@ package com.example.hotel.controller;
 
 import com.example.hotel.HelloApplication;
 import com.example.hotel.notreallymodels.KPIChartFactory;
-import com.example.hotel.notreallymodels.LiveHour;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-import org.kordamp.bootstrapfx.scene.layout.Panel;
-
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executors;
 
-public class HelloController {
-    LiveHour liveHour = new LiveHour();
+public class RecepcionistaController {
     @FXML private Label hora;
     @FXML private Label date;
     @FXML private DatePicker datePicker;
