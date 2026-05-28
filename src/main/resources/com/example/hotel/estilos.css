@@ -1,0 +1,6 @@
+.fondo-principal {
+    -fx-background-image: url('darkwood.png');
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+}
