@@ -14,6 +14,10 @@ public class Habitacion {
         this.ocupada = false;
         this.fueraDeServicio = false;
     }
+    public TipoHabitacion getTipo() {
+        return tipo;
+    }
+
 
     public static Habitacion deTipo(long ID, TipoHabitacion tipo) {
         return new Habitacion(ID, tipo, tipo.ordinal());
