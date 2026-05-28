@@ -16,7 +16,7 @@ public class UsuarioDAO {
         try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
             stmt.setString(1, usuario.usuario());
             stmt.setString(2, usuario.passwordHash());
-            stmt.setInt(3, usuario.rol().ID());
+            stmt.setInt(3, usuario.rol().getId());
             stmt.setTimestamp(4, Timestamp.valueOf(usuario.ultimoLogin()));
             stmt.executeUpdate();
         } catch (SQLException e) {
