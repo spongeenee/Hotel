@@ -7,4 +7,9 @@ public class RecepcionistaRol extends UsuarioRol {
         permisos.add(Permiso.VER_RESERVACIONES);
         permisos.add(Permiso.MODIFICAR_RESERVACION);
     }
+
+    @Override
+    public String toString() {
+        return "RECEPCIONISTA";
+    }
 }

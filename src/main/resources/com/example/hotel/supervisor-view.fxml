@@ -3,8 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -20,118 +20,197 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotel.controller.SupervisorController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1400.0" stylesheets="@estilos.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotel.controller.SupervisorController">
 
+    <!-- Título y botones -->
     <left>
-        <VBox alignment="TOP_CENTER" spacing="10.0" BorderPane.alignment="CENTER">
-            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" VBox.vgrow="NEVER">
-                <Label text="Hoteles y Resort">
-                    <font>
-                        <Font name="Fira Sans Compressed ExtraLight" size="19.0" />
-                    </font>
-                </Label>
-                <Label text="MERU">
-                    <font>
-                        <Font name="FontAwesome" size="73.0" />
-                    </font>
-                    <effect>
-                        <Reflection fraction="0.35" />
-                    </effect>
-                </Label>
-                <effect>
-                    <Bloom />
-                </effect>
-            </VBox>
-            <VBox alignment="TOP_CENTER" spacing="10.0" VBox.vgrow="ALWAYS">
-                <Button maxWidth="Infinity" mnemonicParsing="false" text="Dashboard" VBox.vgrow="ALWAYS">
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                </Button>
-                <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#mostrarReservacionesPanel" text="Gestionar reservaciones" VBox.vgrow="ALWAYS">
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                </Button>
-                <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#mostrarHabitacionesPanel" text="Gestionar habitaciones" VBox.vgrow="ALWAYS">
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                </Button>
-                <Button maxWidth="Infinity" mnemonicParsing="false" text="Gestionar catálogos">
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                </Button>
-                <Button maxWidth="Infinity" mnemonicParsing="false" text="Ver auditoria">
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                </Button>
+        <VBox alignment="TOP_CENTER" spacing="10.0" styleClass="fondo-principal" BorderPane.alignment="CENTER">
+            <VBox VBox.vgrow="ALWAYS">
                 <padding>
-                    <Insets bottom="5.0" right="5.0" top="20.0" />
+                    <Insets bottom="20.0" left="40.0" right="20.0" top="20.0" />
                 </padding>
+                <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" VBox.vgrow="NEVER">
+                    <Label text="Hoteles y Resort" textFill="WHITE">
+                        <font>
+                            <Font name="Fira Sans Compressed ExtraLight" size="19.0" />
+                        </font>
+                    </Label>
+                    <Label text="MERU" textFill="WHITE">
+                        <font>
+                            <Font name="FontAwesome" size="73.0" />
+                        </font>
+                        <effect>
+                            <Reflection fraction="0.35" />
+                        </effect>
+                    </Label>
+                    <effect>
+                        <Bloom />
+                    </effect>
+                </VBox>
+
+                <!-- Botones -->
+                <VBox alignment="TOP_CENTER" spacing="10.0" VBox.vgrow="ALWAYS">
+                    <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#mostrarDashboardPanel" text="Dashboard" VBox.vgrow="ALWAYS">
+                        <cursor>
+                            <Cursor fx:constant="HAND" />
+                        </cursor>
+                    </Button>
+                    <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#mostrarReservacionesPanel" text="Gestionar reservaciones" VBox.vgrow="ALWAYS">
+                        <cursor>
+                            <Cursor fx:constant="HAND" />
+                        </cursor>
+                    </Button>
+                    <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#mostrarHabitacionesPanel" text="Gestionar habitaciones" VBox.vgrow="ALWAYS">
+                        <cursor>
+                            <Cursor fx:constant="HAND" />
+                        </cursor>
+                    </Button>
+                    <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#mostrarCatalogosPanel" text="Gestionar catálogos">
+                        <cursor>
+                            <Cursor fx:constant="HAND" />
+                        </cursor>
+                    </Button>
+                    <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#mostrarAuditoriaPanel" text="Ver auditoria">
+                        <cursor>
+                            <Cursor fx:constant="HAND" />
+                        </cursor>
+                    </Button>
+                    <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#mostrarUsuariosPanel" text="Administración de usuarios" VBox.vgrow="ALWAYS" />
+                </VBox>
             </VBox>
+            <BorderPane.margin>
+                <Insets />
+            </BorderPane.margin>
         </VBox>
     </left>
 
    <center>
-       <StackPane fx:id="menuContenedor" BorderPane.alignment="TOP_CENTER">
-           <padding>
-               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-           </padding>
+       <VBox spacing="20.0" BorderPane.alignment="TOP_CENTER">
 
-           <VBox fx:id="reservacionPanel" alignment="CENTER" spacing="20.0">
-               <VBox alignment="TOP_RIGHT">
-                   <HBox alignment="TOP_CENTER" spacing="10.0">
-                       <TextField maxWidth="Infinity" promptText="Nombre del huesped" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" />
-                       <TextField promptText="Correo del huesped" HBox.hgrow="ALWAYS" />
-                       <ChoiceBox prefWidth="150.0" />
-                       <DatePicker fx:id="datePicker" />
-                       <DatePicker />
-                       <CheckBox mnemonicParsing="false" text="Confirmado" />
-                       <CheckBox mnemonicParsing="false" text="Pagado" />
-                   </HBox>
-                   <Button mnemonicParsing="false" text="Button" />
+           <!-- Barra de login -->
+           <HBox alignment="CENTER" spacing="5.0">
+               <Label text="Usuario actual: " />
+               <Label text="Example" />
+               <Label text="Rol:" />
+               <Label text="ADMIN" />
+               <Region HBox.hgrow="ALWAYS" />
+               <Label text="Hora actual:" />
+           </HBox>
+
+           <!-- Totalidad -->
+           <StackPane fx:id="menuContenedor" VBox.vgrow="ALWAYS">
+
+               <!-- Dashboard -->
+               <VBox fx:id="dashboardPanel">
+
                </VBox>
-               <TableView VBox.vgrow="ALWAYS">
-                   <columnResizePolicy>
-                       <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                   </columnResizePolicy>
-                   <columns>
-                       <TableColumn editable="false" reorderable="false" resizable="false" text="ID" />
-                       <TableColumn editable="false" prefWidth="200" reorderable="false" resizable="false" text="Correo" />
-                       <TableColumn editable="false" prefWidth="100" reorderable="false" resizable="false" text="Habitación" />
-                       <TableColumn editable="false" prefWidth="100" reorderable="false" resizable="false" text="Estado" />
-                       <TableColumn editable="false" reorderable="false" text="Fecha de registro" />
-                       <TableColumn editable="false" reorderable="false" text="Fecha de ingreso" />
-                       <TableColumn editable="false" reorderable="false" text="Fecha de salida" />
-                   </columns>
-               </TableView>
-               <Label fx:id="date" />
-           </VBox>
-           <VBox fx:id="habitacionesPanel" alignment="CENTER" spacing="20.0">
-               <GridPane fx:id="contenedorHabitaciones" VBox.vgrow="ALWAYS" />
-           </VBox>
-       </StackPane>
+
+               <!-- Mostrar reservaciones -->
+               <VBox fx:id="reservacionPanel" alignment="CENTER" spacing="20.0">
+                   <VBox alignment="TOP_RIGHT" spacing="10.0">
+                       <HBox alignment="TOP_CENTER" spacing="10.0">
+                           <TextField maxWidth="Infinity" promptText="Nombre del huesped" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" />
+                           <TextField promptText="Correo del huesped" HBox.hgrow="ALWAYS" />
+                           <ChoiceBox prefWidth="150.0" />
+                           <DatePicker fx:id="datePicker" promptText="Dia de entrada" />
+                           <DatePicker promptText="Día de salida" />
+                           <ComboBox prefWidth="150.0" />
+                       </HBox>
+                       <Button mnemonicParsing="false" text="Buscar reservacion" />
+                   </VBox>
+                   <TableView VBox.vgrow="ALWAYS">
+                       <columnResizePolicy>
+                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                       </columnResizePolicy>
+                       <columns>
+                           <TableColumn editable="false" reorderable="false" resizable="false" text="ID" />
+                           <TableColumn editable="false" prefWidth="200" reorderable="false" resizable="false" text="Correo" />
+                           <TableColumn editable="false" prefWidth="100" reorderable="false" resizable="false" text="Habitación" />
+                           <TableColumn editable="false" prefWidth="100" reorderable="false" resizable="false" text="Estado" />
+                           <TableColumn editable="false" reorderable="false" text="Fecha de registro" />
+                           <TableColumn editable="false" reorderable="false" text="Fecha de ingreso" />
+                           <TableColumn editable="false" reorderable="false" text="Fecha de salida" />
+                       </columns>
+                   </TableView>
+               </VBox>
+
+               <!-- Gestionar habitaciones -->
+               <VBox fx:id="habitacionesPanel" alignment="CENTER" spacing="20.0">
+                   <GridPane fx:id="contenedorHabitaciones" VBox.vgrow="ALWAYS" />
+                   <HBox alignment="CENTER" spacing="10.0">
+                       <Label text="Cambiar estado de la habitación:"/>
+                       <ChoiceBox prefWidth="150.0"/>
+                       <TextField promptText="Motivo" HBox.hgrow="ALWAYS"/>
+                       <Button mnemonicParsing="false" text="Marcar cambio"/>
+                   </HBox>
+               </VBox>
+
+               <!-- Gestionar catálogos -->
+               <VBox fx:id="catalogosPanel">
+
+               </VBox>
+
+               <!-- Ver auditoria -->
+               <VBox fx:id="auditoriaPanel" spacing="10.0">
+                       <HBox alignment="CENTER" spacing="10.0">
+                           <Label text="Buscar por:"/>
+                           <TextField promptText="Resposable" HBox.hgrow="ALWAYS"/>
+                           <ChoiceBox prefWidth="150.0"/>
+                           <ChoiceBox prefWidth="150.0"/>
+                           <DatePicker/>
+                           <DatePicker/>
+                           <Button mnemonicParsing="false" text="Buscar"/>
+                       </HBox>
+                       <TableView VBox.vgrow="ALWAYS">
+                           <columns>
+                               <TableColumn prefWidth="75.0" text="C1"/>
+                               <TableColumn prefWidth="75.0" text="C2"/>
+                           </columns>
+                           <columnResizePolicy>
+                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                           </columnResizePolicy>
+                       </TableView>
+                       <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                           <Button mnemonicParsing="false" text="Generar PDF"/>
+                           <Button mnemonicParsing="false" text="Generar Excel"/>
+                       </HBox>
+                   </VBox>
+
+               <!-- Administración de usuarios -->
+               <VBox fx:id="usuariosPanel" spacing="10.0">
+                   <HBox alignment="CENTER" spacing="10.0" VBox.vgrow="NEVER">
+                       <Label text="Agregar nuevo usuario:"/>
+                       <TextField promptText="Usuario" HBox.hgrow="ALWAYS"/>
+                       <TextField promptText="Contraseña" HBox.hgrow="ALWAYS"/>
+                       <ChoiceBox prefWidth="150.0"/>
+                       <Button mnemonicParsing="false" text="Agregar usuario"/>
+                   </HBox>
+                   <TableView editable="true" VBox.vgrow="ALWAYS">
+                       <columns>
+                           <TableColumn prefWidth="75.0" text="C1"/>
+                           <TableColumn prefWidth="75.0" text="C2"/>
+                       </columns>
+                       <columnResizePolicy>
+                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                       </columnResizePolicy>
+                   </TableView>
+                   <HBox alignment="CENTER_RIGHT" spacing="10.0" VBox.vgrow="NEVER">
+                       <Button mnemonicParsing="false" text="Generar PDF"/>
+                       <Button mnemonicParsing="false" text="Generar Excel"/>
+                       <Region HBox.hgrow="ALWAYS"/>
+                       <Button mnemonicParsing="false" text="Modificar"/>
+                       <Button mnemonicParsing="false" text="Eliminar"/>
+                   </HBox>
+               </VBox>
+           </StackPane>
+           <padding>
+             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+           </padding>
+       </VBox>
    </center>
 
-   <bottom>
-       <HBox alignment="CENTER" spacing="5.0">
-           <Label text="Usuario actual: " />
-           <Label text="Example" />
-           <Label text="Rol:" />
-           <Label text="ADMIN" />
-           <Region HBox.hgrow="ALWAYS" />
-           <Label text="Hora actual:" />
-           <Label fx:id="hora" />
-       </HBox>
-   </bottom>
-
     <right>
+        <!-- Widget de calendario -->
         <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
             <StackPane fx:id="contenedorCalendario" VBox.vgrow="ALWAYS" />
         </VBox>

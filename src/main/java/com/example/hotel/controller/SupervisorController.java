@@ -13,18 +13,34 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 
 public class SupervisorController {
+    private long usuarioID;
+
     @FXML private DatePicker datePicker;
     @FXML private StackPane contenedorCalendario;
     @FXML private GridPane contenedorHabitaciones;
+    @FXML private VBox dashboardPanel;
     @FXML private VBox reservacionPanel;
     @FXML private VBox habitacionesPanel;
+    @FXML private VBox catalogosPanel;
+    @FXML private VBox auditoriaPanel;
+    @FXML private VBox usuariosPanel;
     @FXML private StackPane menuContenedor;
+
+    public void setUsuarioID(long usuarioID) {
+        this.usuarioID = usuarioID;
+    }
 
     @FXML
     protected void initialize() {
         menuContenedor.getChildren().clear();
         cargarCalendario();
         cargarHabitaciones();
+    }
+
+    @FXML
+    protected void mostrarDashboardPanel(){
+        menuContenedor.getChildren().clear();
+        menuContenedor.getChildren().setAll(dashboardPanel);
     }
 
     @FXML
@@ -37,6 +53,24 @@ public class SupervisorController {
     protected void mostrarHabitacionesPanel(){
         menuContenedor.getChildren().clear();
         menuContenedor.getChildren().setAll(habitacionesPanel);
+    }
+
+    @FXML
+    protected void mostrarCatalogosPanel(){
+        menuContenedor.getChildren().clear();
+        menuContenedor.getChildren().setAll(catalogosPanel);
+    }
+
+    @FXML
+    protected void mostrarAuditoriaPanel(){
+        menuContenedor.getChildren().clear();
+        menuContenedor.getChildren().setAll(auditoriaPanel);
+    }
+
+    @FXML
+    protected void mostrarUsuariosPanel(){
+        menuContenedor.getChildren().clear();
+        menuContenedor.getChildren().setAll(usuariosPanel);
     }
 
     private void cargarCalendario() {

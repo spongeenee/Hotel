@@ -1,11 +1,11 @@
-package com.example.hotel.DAO;
+package com.example.hotel.dao;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import com.example.hotel.models.Habitacion;
 import com.example.hotel.models.TipoHabitacion;
-import com.example.hotel.Conexion.ConexionMySQL;
+import com.example.hotel.singleton.ConexionMySQL;
 
 public class HabitacionDAO {
     private Connection conexion;
