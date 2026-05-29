@@ -1,4 +1,4 @@
-package com.example.hotel.DAO;
+package com.example.hotel.dao;
 
 import java.sql.*;
 import com.example.hotel.models.Usuario;
