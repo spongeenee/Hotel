@@ -1,8 +1,11 @@
 package com.example.hotel.dao;
 
 import java.sql.*;
+
+import com.example.hotel.models.RecepcionistaRol;
+import com.example.hotel.models.SupervisorRol;
 import com.example.hotel.models.Usuario;
-import com.example.hotel.Conexion.ConexionMySQL;
+import com.example.hotel.singleton.ConexionMySQL;
 
 public class UsuarioDAO {
     private Connection conexion;
@@ -16,7 +19,7 @@ public class UsuarioDAO {
         try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
             stmt.setString(1, usuario.usuario());
             stmt.setString(2, usuario.passwordHash());
-            stmt.setInt(3, usuario.rol().getId());
+            stmt.setString(3, usuario.rol());
             stmt.setTimestamp(4, Timestamp.valueOf(usuario.ultimoLogin()));
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -34,7 +37,9 @@ public class UsuarioDAO {
                         .ID(rs.getLong("id_usuario"))
                         .usuario(rs.getString("usuario"))
                         .passwordHash(rs.getString("password_hash"))
-                        .rol(new UsuarioRol(rs.getInt("id_rol"), ""))
+                        .rol(
+                                (rs.getString("id_rol").equals("SUPERVISOR") ? new SupervisorRol()
+                                : new RecepcionistaRol()))
                         .self()
                         .build();
             }
