@@ -121,9 +121,6 @@ public class CalendarioController implements Initializable {
         if (salidas > 0)
             celda.getChildren().add(chip(Long.toString(salidas), "#b71c1c", "#ffebee"));
 
-        celda.setOnMouseEntered( e ->
-                celda.setStyle(celda.getStyle() + "-fx-cursor: hand")
-                );
         celda.setOnMousePressed(e -> {
             celda.setStyle(celda.getStyle().replace(bg, esHoy ? "#bbdefb" : dayFocus));
             celda.setStyle(celda.getStyle().replace(borde, bordePressed));

@@ -1,4 +1,4 @@
-package com.example.hotel.Conexion;
+package com.example.hotel.singleton;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,8 +12,8 @@ public class ConexionMySQL {
         try {
             String url = "jdbc:mysql://localhost:3306/hotel?useSSL=false&serverTimezone=UTC";
             String usuario = "root";
-            String contraseña = "1234";
-            conexion = DriverManager.getConnection(url, usuario, contraseña);
+            String password = "1234";
+            conexion = DriverManager.getConnection(url, usuario, password);
             System.out.println("✅ Conexión a MySQL establecida correctamente.");
         } catch (SQLException e) {
             System.err.println("Error al conectar a MySQL: " + e.getMessage());

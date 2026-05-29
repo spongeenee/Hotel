@@ -1,0 +1,62 @@
+.fondo-principal {
+    -fx-background-image: url('darkwood.png');
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+}
+
+.base-navegacion {
+    -fx-background-color: linear-gradient(#1f1f1f, #2f2f2f);
+    -fx-background-radius: 4;
+    -fx-border-color: linear-gradient(#1a1a1a, #757575);
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+}
+
+.top-bar {
+    -fx-background-color: linear-gradient(#1f1f1f, #2f2f2f);
+}
+
+.base-view {
+    -fx-background-color: linear-gradient(#757575, #ababab);
+    -fx-background-radius: 4;
+    -fx-border-color: linear-gradient(#5d5d5d, #c2c2c2);
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+}
+
+.navegacion-button {
+    -fx-background-color: linear-gradient(#737373, #414141);
+}
+
+.widget-celda {
+    -fx-background-color: linear-gradient(#ececec, #cfcfcf);
+    -fx-border-color: #a2a2a2;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.widget-celda-highlight {
+    -fx-background-color: linear-gradient(#d8e1ff, #9dd6ff);
+    -fx-border-color: #2cacc9;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.widget-celda-unavailable {
+    -fx-background-color: linear-gradient(#F7BC63, #FFEED1);
+    -fx-border-color: #a2a2a2;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.widget-celda-busy {
+    -fx-background-color: linear-gradient(#CC2323, #FFDDAD);
+    -fx-border-color: #a2a2a2;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}

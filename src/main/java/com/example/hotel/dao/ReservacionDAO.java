@@ -18,7 +18,7 @@ public class ReservacionDAO {
         try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
             stmt.setLong(1, reservacion.huespedID());
             stmt.setLong(2, reservacion.habitacionID());
-            stmt.setInt(3, reservacion.estado().getId());
+            stmt.setString(3, reservacion.estado().toString());
             stmt.setTimestamp(4, Timestamp.valueOf(reservacion.fechaRegistro()));
             stmt.setTimestamp(5, Timestamp.valueOf(reservacion.fechaIngreso()));
             stmt.setTimestamp(6, Timestamp.valueOf(reservacion.fechaSalida()));

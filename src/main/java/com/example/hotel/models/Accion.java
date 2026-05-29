@@ -5,5 +5,5 @@ public enum Accion {
     MODIFICACION,
     CANCELACION,
     CHECK_IN,
-    CHECK_OUT;
+    CHECK_OUT
 }

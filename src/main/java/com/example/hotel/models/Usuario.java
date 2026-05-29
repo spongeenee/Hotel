@@ -29,8 +29,8 @@ public class Usuario {
         return passwordHash;
     }
 
-    public UsuarioRol rol() {
-        return rol;
+    public String rol() {
+        return rol.toString();
     }
 
     public LocalDateTime ultimoLogin() {

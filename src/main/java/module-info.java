@@ -8,6 +8,7 @@ module com.example.hotel {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires java.sql;
+    requires java.desktop;
 
     opens com.example.hotel to javafx.fxml;
     exports com.example.hotel;

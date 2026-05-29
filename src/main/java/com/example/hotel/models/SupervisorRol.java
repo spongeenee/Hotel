@@ -11,4 +11,9 @@ public class SupervisorRol extends UsuarioRol {
         permisos.add(Permiso.GESTIONAR_CATALOGOS);
         permisos.add(Permiso.VER_AUDITORIA);
     }
+
+    @Override
+    public String toString() {
+        return "SUPERVISOR";
+    }
 }
