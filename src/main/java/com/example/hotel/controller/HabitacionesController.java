@@ -10,6 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class HabitacionesController implements Initializable {
@@ -18,10 +19,6 @@ public class HabitacionesController implements Initializable {
     private Orientacion orientacion;
     private final String[] pisos = {"P1", "P2", "P3", "P4", "P5"};
     @FXML private GridPane gridHabitaciones;
-    @FXML private HBox labelsNorte;
-    @FXML private HBox labelsSur;
-    @FXML private VBox labelsEste;
-    @FXML private VBox labelsOeste;
 
     public void settings(boolean labeled) {
         this.labeled = labeled;
@@ -32,17 +29,20 @@ public class HabitacionesController implements Initializable {
         this.cellSize = cellSize;
         this.labeled = labeled;
         this.orientacion = Orientacion.IZQUIERDA;
+        renderHabitaciones();
     }
 
     public void settings(boolean labeled, Orientacion orientacion) {
         this.labeled = labeled;
         this.orientacion = orientacion;
+        renderHabitaciones();
     }
 
     public void settings(boolean labeled, Orientacion orientacion, long cellSize) {
         this.cellSize = cellSize;
         this.labeled = labeled;
         this.orientacion = orientacion;
+        renderHabitaciones();
     }
 
     @Override
@@ -52,29 +52,34 @@ public class HabitacionesController implements Initializable {
 
     private void renderHabitaciones() {
         gridHabitaciones.getChildren().clear();
+        int start = 0;
+        int end = 10;
 
         if (labeled) {
+            if (orientacion == Orientacion.IZQUIERDA) {
+                start++;
+                end++;
+            }
             for (int i = 0; i < pisos.length; i++) {
                 Label piso = new Label(pisos[pisos.length - i - 1]);
                 piso.setMaxWidth(Double.MAX_VALUE);
                 piso.setAlignment(Pos.CENTER);
                 switch (orientacion) {
-                    case ARRIBA -> labelsNorte.getChildren().add(piso);
-                    case ABAJO -> labelsSur.getChildren().add(piso);
-                    case IZQUIERDA -> labelsOeste.getChildren().add(piso);
-                    case DERECHA -> labelsEste.getChildren().add(piso);
+                    case IZQUIERDA -> gridHabitaciones.add(piso, 0, i);
+                    case DERECHA -> gridHabitaciones.add(piso, end, i);
                 }
             }
         }
 
-        int col = 0;
+        int col = start;
         int row = 0;
         int pisoIndex = 40;
-        for (int i = 1; i <= 50; i++) {
-            gridHabitaciones.add(celdaHabitacion(pisoIndex + col), col, row);
-            if (++col == 10) {
+        for (int i = 1, j = 1; i <= 50; i++, j++) {
+            gridHabitaciones.add(celdaHabitacion(pisoIndex + j), col, row);
+            if (++col == end) {
                 row++;
-                col = 0;
+                col = start;
+                j = 0;
                 pisoIndex = pisoIndex - 10;
             }
         }

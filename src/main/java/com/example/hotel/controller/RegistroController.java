@@ -44,7 +44,7 @@ public class RegistroController implements Initializable {
             );
             Parent vista = loader.load();
             HabitacionesController controller = loader.getController();
-            controller.settings(true, Orientacion.ABAJO, 20);
+            controller.settings(true, Orientacion.IZQUIERDA, 30);
             habitacionPanel.getChildren().setAll(vista);
         } catch (IOException e) {
             System.err.println(e.getMessage());

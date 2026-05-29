@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-public class RecepcionistaController {
+public class RecepcionistaController extends UsuarioController {
     private long usuarioID;
 
     @FXML private StackPane calendarioWidget;
@@ -32,6 +32,7 @@ public class RecepcionistaController {
     @FXML private VBox KPIentradas;
     @FXML private VBox KPIsalidas;
     @FXML private VBox KPIrecientes;
+    @FXML private Label encabezado;
 
     @FXML private TextField registroNombre;
     @FXML private TextField registroCorreo;
@@ -53,6 +54,7 @@ public class RecepcionistaController {
     @FXML
     protected void initialize() {
         menuContenedor.getChildren().setAll(dashboard);
+        encabezado.setText("Bienvenido, " + usuarioID);
         cargarCalendario();
         cargarHabitaciones();
         cargarGraphDashboard();
@@ -76,24 +78,21 @@ public class RecepcionistaController {
     protected void mostrarReservacionPane() {
         menuContenedor.getChildren().clear();
         menuContenedor.getChildren().setAll(reservacionPane);
+        encabezado.setText("Registro de Reservaciones");
     }
 
     @FXML
     protected void mostrarHuespedesPane() {
         menuContenedor.getChildren().clear();
         menuContenedor.getChildren().setAll(huespedesPane);
+        encabezado.setText("Registro de Habitaciones");
     }
 
     @FXML
     protected void mostrarDashboardPane() {
         menuContenedor.getChildren().clear();
         menuContenedor.getChildren().setAll(dashboard);
-    }
-
-    @FXML
-    protected void cerrarSesion(ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+        encabezado.setText("Dashboard");
     }
 
     private void cargarCalendario() {
@@ -115,9 +114,8 @@ public class RecepcionistaController {
                     HelloApplication.class.getResource("habitaciones.fxml")
             );
             Parent vista = loader.load();
-
             HabitacionesController controller = loader.getController();
-            controller.settings(true, Orientacion.ARRIBA);
+            controller.settings(true, Orientacion.DERECHA);
             habitacionesWidget.getChildren().setAll(vista);
         } catch (IOException e) {
             System.err.println(e.getMessage());

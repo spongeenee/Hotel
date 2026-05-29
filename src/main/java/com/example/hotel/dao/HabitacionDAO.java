@@ -19,7 +19,7 @@ public class HabitacionDAO {
         try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
             stmt.setInt(1, habitacion.getTipo().ordinal());
             stmt.setDouble(2, habitacion.tarifaPerDia());
-            stmt.setBoolean(3, habitacion.estaOcupada());
+            stmt.setBoolean(3, habitacion.ocupado());
             stmt.setBoolean(4, habitacion.fueraDeServicio());
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -38,8 +38,6 @@ public class HabitacionDAO {
                         TipoHabitacion.values()[rs.getInt("id_tipo")],
                         rs.getDouble("tarifa_por_dia")
                 );
-                h.definirDisponibilidad(rs.getBoolean("ocupada"));
-                h.definirServicio(rs.getBoolean("fuera_de_servicio"));
                 lista.add(h);
             }
         } catch (SQLException e) {

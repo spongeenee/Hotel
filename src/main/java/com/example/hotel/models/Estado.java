@@ -5,5 +5,5 @@ public enum Estado {
     FINALIZADA,
     PENDIENTE,
     CONFIRMADA,
-    CANCELADA;
+    CANCELADA
 }
