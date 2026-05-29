@@ -1,28 +1,31 @@
 package com.example.hotel.controller;
 
 import com.example.hotel.HelloApplication;
-import com.example.hotel.models.Estado;
-import com.example.hotel.models.Habitacion;
-import com.example.hotel.models.Reservacion;
+import com.example.hotel.models.*;
 import com.example.hotel.notreallymodels.KPIChartFactory;
+import com.example.hotel.notreallymodels.Orientacion;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class RecepcionistaController {
     private long usuarioID;
 
-    @FXML private GridPane contenedorHabitaciones;
-    @FXML private StackPane contenedorCalendario;
+    @FXML private StackPane calendarioWidget;
     @FXML private StackPane menuContenedor;
+    @FXML private GridPane habitacionesWidget;
     @FXML private VBox dashboard;
     @FXML private VBox reservacionPane;
     @FXML private VBox huespedesPane;
@@ -47,14 +50,26 @@ public class RecepcionistaController {
         this.usuarioID = usuarioID;
     }
 
-
-
     @FXML
     protected void initialize() {
         menuContenedor.getChildren().setAll(dashboard);
         cargarCalendario();
         cargarHabitaciones();
         cargarGraphDashboard();
+    }
+
+    @FXML
+    protected void registrarReservacion() throws IOException {
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("registro-view.fxml"));
+        Parent root = loader.load();
+        RegistroController controller = loader.getController();
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Registro Reservacion");
+        stage.setResizable(false);
+        stage.showAndWait();
     }
 
     @FXML
@@ -75,13 +90,19 @@ public class RecepcionistaController {
         menuContenedor.getChildren().setAll(dashboard);
     }
 
+    @FXML
+    protected void cerrarSesion(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
     private void cargarCalendario() {
         try {
             FXMLLoader loader = new FXMLLoader(
                     HelloApplication.class.getResource("calendario.fxml")
             );
             Parent vista = loader.load();
-            contenedorCalendario.getChildren().setAll(vista);
+            calendarioWidget.getChildren().setAll(vista);
 
         } catch (IOException e) {
             System.err.println(e.getMessage());
@@ -94,12 +115,14 @@ public class RecepcionistaController {
                     HelloApplication.class.getResource("habitaciones.fxml")
             );
             Parent vista = loader.load();
-            contenedorHabitaciones.getChildren().setAll(vista);
+
+            HabitacionesController controller = loader.getController();
+            controller.settings(true, Orientacion.ARRIBA);
+            habitacionesWidget.getChildren().setAll(vista);
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
     }
-
     private void cargarGraphDashboard() {
         KPIentradas.getChildren().add(
                 KPIChartFactory.crearKPI("Entradas del dia", 10, 20));

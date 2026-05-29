@@ -6,29 +6,39 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import javafx.geometry.Insets?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.hotel.controller.HabitacionesController">
 
-    <padding>
-        <Insets top="16" right="16" bottom="16" left="16"/>
-    </padding>
+    <left>
+        <VBox fx:id="labelsOeste"/>
+    </left>
+
+    <right>
+        <VBox fx:id="labelsEste"/>
+    </right>
+
+    <top>
+        <HBox fx:id="labelsNorte"/>
+    </top>
+
+    <bottom>
+        <HBox fx:id="labelsSur"/>
+    </bottom>
 
     <center>
         <GridPane fx:id="gridHabitaciones" alignment="CENTER" hgap="4" vgap="4">
             <columnConstraints>
-                <ColumnConstraints percentWidth="20" hgrow="ALWAYS" halignment="CENTER"/>
-                <ColumnConstraints percentWidth="8" hgrow="ALWAYS" halignment="CENTER"/>
-                <ColumnConstraints percentWidth="8" hgrow="ALWAYS" halignment="CENTER"/>
-                <ColumnConstraints percentWidth="8" hgrow="ALWAYS" halignment="CENTER"/>
-                <ColumnConstraints percentWidth="8" hgrow="ALWAYS" halignment="CENTER"/>
-                <ColumnConstraints percentWidth="8" hgrow="ALWAYS" halignment="CENTER"/>
-                <ColumnConstraints percentWidth="8" hgrow="ALWAYS" halignment="CENTER"/>
-                <ColumnConstraints percentWidth="8" hgrow="ALWAYS" halignment="CENTER"/>
-                <ColumnConstraints percentWidth="8" hgrow="ALWAYS" halignment="CENTER"/>
-                <ColumnConstraints percentWidth="8" hgrow="ALWAYS" halignment="CENTER"/>
-                <ColumnConstraints percentWidth="8" hgrow="ALWAYS" halignment="CENTER"/>
+                <ColumnConstraints percentWidth="10" hgrow="ALWAYS" halignment="CENTER"/>
+                <ColumnConstraints percentWidth="10" hgrow="ALWAYS" halignment="CENTER"/>
+                <ColumnConstraints percentWidth="10" hgrow="ALWAYS" halignment="CENTER"/>
+                <ColumnConstraints percentWidth="10" hgrow="ALWAYS" halignment="CENTER"/>
+                <ColumnConstraints percentWidth="10" hgrow="ALWAYS" halignment="CENTER"/>
+                <ColumnConstraints percentWidth="10" hgrow="ALWAYS" halignment="CENTER"/>
+                <ColumnConstraints percentWidth="10" hgrow="ALWAYS" halignment="CENTER"/>
+                <ColumnConstraints percentWidth="10" hgrow="ALWAYS" halignment="CENTER"/>
+                <ColumnConstraints percentWidth="10" hgrow="ALWAYS" halignment="CENTER"/>
+                <ColumnConstraints percentWidth="10" hgrow="ALWAYS" halignment="CENTER"/>
             </columnConstraints>
         </GridPane>
     </center>
