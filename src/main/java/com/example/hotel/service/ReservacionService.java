@@ -13,11 +13,7 @@ import java.util.List;
 
 public class ReservacionService extends GenericService<Reservacion> {
     public ReservacionService() {
-        try {
-            this.dao = new ReservacionDAO();
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
+        this.dao = new ReservacionDAO();
     }
 
     public int registrar(Reservacion reservacion) {

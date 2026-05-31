@@ -19,6 +19,9 @@ public abstract class GenericDAO<T> {
 
     public GenericDAO() {
         this.conexion = ConexionMySQL.getInstancia().getConexion();
+        if (this.conexion == null) {
+            throw new RuntimeException("Error al conectar a MySQL. Base de datos nulo.");
+        }
     }
 
     /**

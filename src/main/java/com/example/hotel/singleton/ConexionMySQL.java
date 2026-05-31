@@ -10,14 +10,13 @@ public class ConexionMySQL {
 
     private ConexionMySQL() {
         try {
-            String url = "jdbc:mysql://localhost:3306/hotel?useSSL=false&serverTimezone=UTC";
+            String url = "jdbc:mysql://localhost:3306/HotelDB";
             String usuario = "root";
             String password = "password";
-            conexion = DriverManager.getConnection(url, usuario, password);
-            System.out.println("✅ Conexión a MySQL establecida correctamente.");
+            this.conexion = DriverManager.getConnection(url, usuario, password);
+            System.out.println("O Conexión a MySQL establecida correctamente.");
         } catch (SQLException e) {
-            System.err.println("Error al conectar a MySQL: " + e.getMessage());
-            conexion = null;
+            throw new RuntimeException("X Error al conectar a MySQL: " + e.getMessage(), e);
         }
     }
 
