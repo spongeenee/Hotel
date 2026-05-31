@@ -40,20 +40,20 @@ public abstract class GenericDAO<T> {
      * @param ID Identificador de la entidad
      * @return true si la operación fue exitosa
      */
-    public abstract int eliminar(Long ID) throws SQLException;
+    public abstract int eliminar(long ID);
 
     /**
      * Busca una entidad por su ID
      * @param ID Identificador de la entidad
      * @return La entidad encontrada o null
      */
-    public abstract Optional<T> buscarPorID(Long ID) throws SQLException;
+    public abstract Optional<T> buscarPorID(Long ID);
 
     /**
      * Obtiene todas las entidades
      * @return Lista de entidades
      */
-    public abstract List<T> listar() throws SQLException;
+    public abstract List<T> listar();
 
     /**
      * Convierte un ResultSet en una entidad

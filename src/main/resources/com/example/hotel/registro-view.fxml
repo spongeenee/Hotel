@@ -36,6 +36,7 @@
             </padding>
         </VBox>
     </left>
+
     <center>
         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
             <padding>
@@ -62,7 +63,7 @@
             <HBox alignment="CENTER_LEFT" spacing="20.0">
                 <Label text="Estado:" />
                 <Region HBox.hgrow="ALWAYS" />
-                <ChoiceBox prefWidth="150.0" HBox.hgrow="ALWAYS" />
+                <ChoiceBox fx:id="estado" prefWidth="150.0" HBox.hgrow="ALWAYS" />
             </HBox>
             <Label />
          <BorderPane.margin>
@@ -77,7 +78,7 @@
            </padding>
            <GridPane fx:id="habitacionPanel" />
          <Region VBox.vgrow="ALWAYS" />
-         <Button mnemonicParsing="false" text="Registrar" />
+         <Button mnemonicParsing="false" text="Registrar" onAction="#registrar"/>
        </VBox>
    </right>
 </BorderPane>

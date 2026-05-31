@@ -17,7 +17,7 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
 
     @Override
     public int registrar(Usuario usuario) {
-        String sql = "INSERT INTO Usuario (usuario, password_hash, id_rol, ultimo_login) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Usuario (usuario, password_hash, rol, ultimo_login) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
             stmt.setString(1, usuario.usuario());
             stmt.setString(2, usuario.passwordHash());
@@ -32,7 +32,7 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
 
     @Override
     public int actualizar(Usuario usuario) {
-        String sql = "UPDATE Usuario SET usuario=?, password_hash=?, id_rol=?, ultimo_login=? WHERE id_usuario=?";
+        String sql = "UPDATE Usuario SET usuario=?, password_hash=?, rol=?, ultimo_login=? WHERE id_usuario=?";
         try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
             stmt.setString(1, usuario.usuario());
             stmt.setString(2, usuario.passwordHash());
@@ -47,7 +47,7 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
     }
 
     @Override
-    public int eliminar(Long ID) {
+    public int eliminar(long ID) {
         String sql = "DELETE FROM Usuario WHERE id_usuario=?";
         try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
             stmt.setLong(1, ID);
@@ -91,8 +91,7 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
                 .ID(rs.getLong("id_usuario"))
                 .usuario(rs.getString("usuario"))
                 .passwordHash(rs.getString("password_hash"))
-                .rol(rolFromString(rs.getString("id_rol")))
-                .self()
+                .rol(rolFromString(rs.getString("rol")))
                 .build();
     }
 

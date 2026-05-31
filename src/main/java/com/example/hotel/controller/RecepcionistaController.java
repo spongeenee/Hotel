@@ -1,9 +1,13 @@
 package com.example.hotel.controller;
 
 import com.example.hotel.HelloApplication;
+import com.example.hotel.adapters.ReservacionAdapter;
 import com.example.hotel.models.*;
 import com.example.hotel.notreallymodels.KPIChartFactory;
 import com.example.hotel.notreallymodels.Orientacion;
+import com.example.hotel.service.ReservacionService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +26,9 @@ import java.time.LocalDateTime;
 
 public class RecepcionistaController extends UsuarioController {
     private long usuarioID;
+    private final ReservacionService reservacionService =  new ReservacionService();
+    private ObservableList<ReservacionAdapter> reservaciones =  FXCollections.observableArrayList();
+
 
     @FXML private StackPane calendarioWidget;
     @FXML private StackPane menuContenedor;
@@ -38,14 +45,14 @@ public class RecepcionistaController extends UsuarioController {
     @FXML private TextField registroCorreo;
     @FXML private DatePicker registroDesde;
     @FXML private DatePicker registroHasta;
-    @FXML private TableColumn<Reservacion, String> reservacionIDColumn;
-    @FXML private TableColumn<Reservacion, String> reservacionCorreoColumn;
-    @FXML private TableColumn<Reservacion, String> reservacionHabitacionColumn;
-    @FXML private TableColumn<Reservacion, Estado> reservacionEstadoColumn;
-    @FXML private TableColumn<Reservacion, LocalDateTime> reservacionRegistoColumn;
-    @FXML private TableColumn<Reservacion, LocalDateTime> reservacionIngresoColumn;
-    @FXML private TableColumn<Reservacion, LocalDateTime> reservacionSalidaColumn;
-    @FXML private TableView<Reservacion> reservacionTableView;
+    @FXML private TableColumn<ReservacionAdapter, Long> reservacionIDColumn;
+    @FXML private TableColumn<ReservacionAdapter, String> reservacionCorreoColumn;
+    @FXML private TableColumn<ReservacionAdapter, Long> reservacionHabitacionColumn;
+    @FXML private TableColumn<ReservacionAdapter, String> reservacionEstadoColumn;
+    @FXML private TableColumn<ReservacionAdapter, LocalDateTime> reservacionRegistoColumn;
+    @FXML private TableColumn<ReservacionAdapter, LocalDateTime> reservacionIngresoColumn;
+    @FXML private TableColumn<ReservacionAdapter, LocalDateTime> reservacionSalidaColumn;
+    @FXML private TableView<ReservacionAdapter> reservacionTableView;
 
     public void setUsuarioID(long usuarioID) {
         this.usuarioID = usuarioID;
@@ -53,6 +60,18 @@ public class RecepcionistaController extends UsuarioController {
 
     @FXML
     protected void initialize() {
+        reservaciones = FXCollections.observableArrayList(reservacionService.reservacionAAdapter(reservacionService.listar()));
+
+        reservacionIDColumn.setCellValueFactory(c -> c.getValue().IDProperty());
+        reservacionCorreoColumn.setCellValueFactory(c -> c.getValue().huespedMailProperty());
+        reservacionHabitacionColumn.setCellValueFactory(c -> c.getValue().habitacionIDProperty());
+        reservacionEstadoColumn.setCellValueFactory(c -> c.getValue().estadoProperty());
+        reservacionRegistoColumn.setCellValueFactory(c -> c.getValue().fechaRegistroProperty());
+        reservacionIngresoColumn.setCellValueFactory(c -> c.getValue().fechaIngresoProperty());
+        reservacionSalidaColumn.setCellValueFactory(c -> c.getValue().fechaSalidaProperty());
+
+        reservacionTableView.setItems(reservaciones);
+
         menuContenedor.getChildren().setAll(dashboard);
         encabezado.setText("Bienvenido, " + usuarioID);
         cargarCalendario();
@@ -64,8 +83,6 @@ public class RecepcionistaController extends UsuarioController {
     protected void registrarReservacion() throws IOException {
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("registro-view.fxml"));
         Parent root = loader.load();
-        RegistroController controller = loader.getController();
-
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.initModality(Modality.APPLICATION_MODAL);

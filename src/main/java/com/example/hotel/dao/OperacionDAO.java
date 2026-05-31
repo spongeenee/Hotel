@@ -35,7 +35,7 @@ public class OperacionDAO extends GenericDAO<Operacion> {
     }
 
     @Override
-    public int eliminar(Long ID) {
+    public int eliminar(long ID) {
         String sql = "DELETE FROM Operacion WHERE id_operacion=?";
         try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
             stmt.setLong(1, ID);

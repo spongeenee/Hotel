@@ -40,7 +40,7 @@ public class HuespedDAO extends GenericDAO<Huesped> {
     }
 
     @Override
-    public int eliminar(Long ID) {
+    public int eliminar(long ID) {
         String sql = "DELETE FROM Huesped WHERE id_huesped=?";
         try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
             stmt.setLong(1, ID);

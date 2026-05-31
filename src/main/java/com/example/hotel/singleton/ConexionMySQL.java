@@ -12,7 +12,7 @@ public class ConexionMySQL {
         try {
             String url = "jdbc:mysql://localhost:3306/hotel?useSSL=false&serverTimezone=UTC";
             String usuario = "root";
-            String password = "1234";
+            String password = "password";
             conexion = DriverManager.getConnection(url, usuario, password);
             System.out.println("✅ Conexión a MySQL establecida correctamente.");
         } catch (SQLException e) {

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class HabitacionDAO extends GenericDAO<Habitacion> {
-    public HabitacionDAO() throws SQLException {
+    public HabitacionDAO() {
         super();
     }
 
@@ -50,7 +50,7 @@ public class HabitacionDAO extends GenericDAO<Habitacion> {
     }
 
     @Override
-    public int eliminar(Long ID) {
+    public int eliminar(long ID) {
         String sql = "DELETE FROM Habitacion WHERE id_habitacion=?";
         try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
             stmt.setLong(1, ID);
