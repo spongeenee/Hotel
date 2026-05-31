@@ -1,7 +1,7 @@
 package com.example.hotel.models;
 
 public class Habitacion {
-    private final long ID;
+    private long ID;
     private final TipoHabitacion tipo;
     private final double tarifaPerDia;
     private HabitacionEstado estado;
@@ -12,7 +12,7 @@ public class Habitacion {
         this.tarifaPerDia = tarifaPerDia;
         this.estado = HabitacionEstado.DISPONIBLE;
     }
-    public TipoHabitacion getTipo() {
+    public TipoHabitacion tipo() {
         return tipo;
     }
 
@@ -24,12 +24,24 @@ public class Habitacion {
         return new Habitacion(ID, tipo, tarifaPerDia);
     }
 
+    public long ID() {
+        return ID;
+    }
+
+    public void setID (long ID) {
+        this.ID = ID;
+    }
+
     public double tarifaPerDia() {
         return tarifaPerDia;
     }
 
     public double calcularTarifa(int dias) {
         return tarifaPerDia * dias;
+    }
+
+    public HabitacionEstado estado() {
+        return estado;
     }
 
     public void cambiarEstado(HabitacionEstado estado) {

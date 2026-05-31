@@ -83,13 +83,28 @@ public class Reservacion {
             return this;
         }
 
+        public Reservacion.Builder fechaRegistro(LocalDateTime fechaRegistro) {
+            this.fechaRegistro = fechaRegistro;
+            return this;
+        }
+
         public Reservacion.Builder fechaIngreso(LocalDate fechaIngreso) {
-            this.fechaRegistro = fechaIngreso.atTime(LocalTime.NOON);
+            this.fechaIngreso = fechaIngreso.atTime(LocalTime.NOON);
+            return this;
+        }
+
+        public Reservacion.Builder fechaIngreso(LocalDateTime fechaIngreso) {
+            this.fechaIngreso = fechaIngreso;
             return this;
         }
 
         public Reservacion.Builder fechaSalida(LocalDate fechaSalida) {
             this.fechaSalida = fechaSalida.atTime(LocalTime.NOON);
+            return this;
+        }
+
+        public Reservacion.Builder fechaSalida(LocalDateTime fechaSalida) {
+            this.fechaSalida = fechaSalida;
             return this;
         }
 
